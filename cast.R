@@ -37,7 +37,7 @@ data$average[(data$average)==-99.99] <- NA
 co2 <- ts(data$interpolated, frequency=12, start=c(1958,3))
 
 #Create ts of April levels
-April <- subset(co2), cycle(co2)==4)
+April <- subset((co2), cycle(co2)==4)
 
 #Do initial forecast
 forecast(co2)
