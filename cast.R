@@ -37,7 +37,7 @@ data$average[(data$average)==-99.99] <- NA
 co2 <- ts(data$interpolated, frequency=12, start=c(1958,3))
 
 #Create ts of April levels
-April <- subset(diff(diff(co2)), cycle(diff(diff(co2)))==4)
+April <- subset(co2), cycle(co2)==4)
 
 #Do initial forecast
 forecast(co2)
@@ -45,7 +45,7 @@ forecast(co2)
 #Check default forecast method
 result <- data.frame()
 for (y in 1990:2016){
-  zz <- diff(diff(tfwindow(co2, end=c(y,2))))
+  zz <- tfwindow(co2, end=c(y,2))
   temp1 <- forecast(zz, h=2)
   temp2 <- as.data.frame(temp1)[2,]
   result <- rbind(result, temp2)
