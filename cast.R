@@ -60,4 +60,24 @@ result$diff <- abs(result$Actual - result$`Point Forecast`)
 #Summarize result
 summary(result$diff)
 
+#Check X-13SEATS method
+result <- data.frame()
+for (y in 1990:2016){
+  zz <- tfwindow(co2, end=c(y,2))
+  fit <- seas(
+    x = zz,
+    regression.aictest = NULL,
+    regression.variables = "const", 
+    forecast.save = "fct"
+  )
+  temp2 <- as.data.frame(fit$series$fct)[2,]
+  result <- rbind(result, temp2)
+}
+
+result$Actual <- tail(April,dim(result)[1])
+
+result$diff <- abs(result$Actual - result$forecast)
+
+summary(result$diff)
+
 
